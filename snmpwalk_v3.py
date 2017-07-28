@@ -38,19 +38,28 @@ def getArgs():
     return args
 
 def main():
-    logger=logging.getLogger('snmpwalk.py')
+    logger=logging.getLogger('snmpwalk_v3.py')
     args = getArgs()
     #print args
-    #print("The hostname is: %s " % ( args.hostname ))
+    logger.debug("The hostname is: %s " % ( args.hostname ))
     HOST=args.hostname
 
-    print "Please enter the community string: "
-    passwd=getpass.getpass()
-    #print ("The password you entered was: %s " % passwd)
+    print "Please Auth Pass: "
+    authPass=getpass.getpass()
+    #print ("The auth password you entered was: %s " % authPass)
 
-    #snmp_walk( 'system', hostname=HOST, community=passwd, version=2) 
-    system_description = snmp_get ('sysName.0',hostname=HOST, community=passwd, version=2) 
-    print system_description
+    print "Please enter Priv Pass: "
+    privPass=getpass.getpass()
+    #print ("The priv password you entered was: %s " % privPass)
+
+    session = Session(hostname=HOST, security_level='auth_with_privacy', security_username='sa_linux_snmp_v3', privacy_protocol='AES', privacy_password=privPass, auth_protocol='SHA', auth_password=authPass, version=3)
+
+
+    logger.debug("The Session info is: %s " % session)
+
+    location = session.get('sysDescr.0')
+
+    print("The Location of this system is: %s " % location)
     logger.debug(args)
 
 
