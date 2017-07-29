@@ -11,6 +11,8 @@
 ##
 ## NOTES: This script is written to take a list of files in a directory
 ## and convert them from HTML to PDF
+##
+## ToDo: Need to add error checking on directory argument
 
 import argparse
 import logging
