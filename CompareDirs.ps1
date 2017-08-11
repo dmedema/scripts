@@ -13,7 +13,7 @@ If (!(test-path $good_dir))
   New-Item -ItemType Directory -Force -Path $good_dir
 }
 
-#This will print a list of files that exist in $batch_files that do NOT exist in $data_files
+#This will print a list of files that exist in both $batch_files and $data_files
 Compare-Object $batch_files $data_files -IncludeEqual | 
   Where-Object {$_.SideIndicator -eq '=='} | Select-Object -ExpandProperty inputobject |
   foreach-object -process{
