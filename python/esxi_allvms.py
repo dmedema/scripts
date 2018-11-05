@@ -64,8 +64,7 @@ def main():
     args = getArgs()
     logger.debug(args)
 
-    #password= getpass.getpass('Enter the vSphere password to proceed: ')
-    password='lrtLRT12$'
+    password= getpass.getpass('Enter the vSphere password to proceed: ')
     user='administrator@vsphere.local'
 
     my_cluster = connect.ConnectNoSSL(args.host, "443", user, password)
@@ -77,7 +76,7 @@ def main():
 
     #Iterating each vm object and printing its name
     for vm in getAllVms:
-        #print vm.config.uuid
+        #print vm.Summary
         #print("%s %d %s %s" % (name, ts, val, tag_str))
         print("VM Name: %s " "VM IP Address: %s " % (vm.config.name, vm.guest.ipAddress))
 
