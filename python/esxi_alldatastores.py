@@ -64,19 +64,19 @@ def main():
     args = getArgs()
     logger.debug(args)
 
-    password= getpass.getpass('Enter the vSphere password to proceed: ')
-    user='administrator@sphere.local'
+    password = getpass.getpass('Enter the vSphere password to proceed: ')
+    user='administrator@vsphere.local'
 
     my_cluster = connect.ConnectNoSSL(args.host, "443", user, password)
     content=my_cluster.content
     logger.debug(content)
 
     #Calling above method
-    getAllVms=get_all_objs(content, [vim.VirtualMachine])
+    datastores=get_all_objs(content, [vim.Datastore])
 
-    #Iterating each vm object and printing its name
-    for vm in getAllVms:
-        print vm.name
+    #Iterating each cluster object and printing its name
+    for datastore in datastores:
+            print (datastore.name)
 
 if __name__ == "__main__":
     main()
