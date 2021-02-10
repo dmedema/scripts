@@ -77,6 +77,7 @@ def main():
     #Iterating each cluster object and printing its name
     for cluster in clusters:
             print (cluster.name)
+            #print (cluster.summary)
 
 if __name__ == "__main__":
     main()

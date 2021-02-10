@@ -26,7 +26,7 @@ def getArgs():
     parser.add_argument('-v', '--verbose', action='store_true', help="Enable verbose output")
     parser.add_argument('-q', '--quiet', action='store_true', help="Output errors only")
     # NOTE: Adding additional variables, don't use the action= option
-    #parser.add_argument('-u', '--user', help="Username to connect with", required=True)
+    parser.add_argument('-u', '--user', help="Username to connect with", required=True)
     #parser.add_argument('-p', '--password', required=True, help="Password to connect with")
     parser.add_argument('-host', '--host', required=True, help="Enter the IP of the ESXi host or vShpere cluster")
     #parser.add_argument('-port', '--port', required=True, help="Enter port to connect on")
@@ -65,7 +65,7 @@ def main():
     logger.debug(args)
 
     password= getpass.getpass('Enter the vSphere password to proceed: ')
-    user='administrator@vsphere.local'
+    user=args.user
 
     my_cluster = connect.ConnectNoSSL(args.host, "443", user, password)
     content=my_cluster.content
@@ -78,7 +78,7 @@ def main():
     for vm in getAllVms:
         #print vm.Summary
         #print("%s %d %s %s" % (name, ts, val, tag_str))
-        print("VM Name: %s " "VM IP Address: %s " % (vm.config.name, vm.guest.ipAddress))
+        print( "VM Name: %s " "VM IP Address: %s " % ( vm.config.name, vm.guest.ipAddress))
 
 if __name__ == "__main__":
     main()

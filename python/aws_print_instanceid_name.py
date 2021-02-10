@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 ##
-## Info:                This is a script to an AWS EC2 Instances
+## Info:                This is a script to get all AWS EC2 Instances
 ##                      Name and InstanceId
 ##                      
 ## Created by:          Denise Medema
@@ -21,7 +21,7 @@ import boto3
 def get_instance_name(fid):
     ec2 = boto3.resource('ec2')
     ec2instance = ec2.Instance(fid)
-    instancenaem = ''
+    instancename = ''
     for tags in ec2instance.tags:
         if tags["Key"] == 'Name':
             instancename = tags["Value"]

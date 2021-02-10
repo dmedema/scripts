@@ -70,8 +70,6 @@ def main():
     for x in fileList:
         convertToPdf(x)
 
-    #convertToPdf("vlan230_External_Scan1_6jumz9.html")
-
 if __name__ == "__main__":
     main()
 
